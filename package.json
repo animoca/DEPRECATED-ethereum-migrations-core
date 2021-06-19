@@ -1,0 +1,82 @@
+{
+  "name": "@animoca/ethereum-migrations-core",
+  "version": "1.0.0",
+  "description": "Common configs and functions for migrations projects based on hardhat-deploy",
+  "keywords": [
+    "animoca",
+    "ethereum",
+    "hardhat",
+    "migrations"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:animoca/ethereum-migrations-core.git"
+  },
+  "license": "MIT",
+  "author": "Animoca Brands",
+  "scripts": {
+    "postinstall": "animoca-setup-vscode",
+    "lint:js": "eslint \"**/*.{js,ts}\"",
+    "lint": "run-s lint:js",
+    "fix:js": "eslint --fix \"**/*.{js,ts}\"",
+    "fix": "run-s fix:js",
+    "format:js": "prettier --write \"**/*.{ts,js}\"",
+    "format": "run-s format:js",
+    "dev:localhost": "hardhat --network localhost deploy --watch",
+    "run:localhost": "cross-env HARDHAT_NETWORK=localhost node --files",
+    "run:ropsten": "cross-env HARDHAT_NETWORK=ropsten node --files",
+    "run:rinkeby": "cross-env HARDHAT_NETWORK=rinkeby node --files",
+    "run:mainnet": "cross-env HARDHAT_NETWORK=mainnet node --files",
+    "run:mumbai": "cross-env HARDHAT_NETWORK=mumbai node --files",
+    "run:matic": "cross-env HARDHAT_NETWORK=matic node --files",
+    "run:bsctest": "cross-env HARDHAT_NETWORK=bsctest node --files",
+    "run:bsc": "cross-env HARDHAT_NETWORK=bsc node --files",
+    "ganache": "ganache-cli -g 1000000000",
+    "deploy": "hardhat deploy",
+    "deploy:localhost": "hardhat --network localhost deploy",
+    "deploy:ropsten": "hardhat --network ropsten deploy",
+    "deploy:rinkeby": "hardhat --network rinkeby deploy",
+    "deploy:goerli": "hardhat --network goerli deploy",
+    "deploy:mainnet": "hardhat --network mainnet deploy",
+    "deploy:mumbai": "hardhat --network mumbai deploy",
+    "deploy:matic": "hardhat --network matic deploy",
+    "deploy:bsctest": "hardhat --network bsctest deploy",
+    "deploy:bsc": "hardhat --network bsc deploy",
+    "clean:vscode": "rm -rf .vscode/extensions.json .vscode/launch.json .vscode/settings.json",
+    "clean:cache": "rm -rf cache",
+    "clean:deployments": "rm -rf deployments/localhost* deployments/hardhat*",
+    "clean:exports": "rm -rf exports/localhost* exports/hardhat*",
+    "clean:generated": "rm -rf generated/localhost* generated/hardhat*",
+    "clean": "run-s clean:cache clean:deployments clean:exports clean:generated",
+    "run-all": "run-s format fix clean deploy",
+    "prepack:migrations": "run-s clean",
+    "prepack": "run-s prepack:migrations",
+    "release:private": "animoca-release-package private",
+    "release:public": "animoca-release-package public"
+  },
+  "dependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.2",
+    "@nomiclabs/hardhat-etherscan": "^2.1.3",
+    "cli-progress": "^3.9.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
+    "glob": "^7.1.7",
+    "hardhat-deploy": "^0.8.8",
+    "hardhat-deploy-ethers": "^0.3.0-beta.10",
+    "wait-on": "^5.3.0",
+    "yesno": "^0.3.1"
+  },
+  "devDependencies": {
+    "@animoca/ethereum-hardhat-bootstrap": "^1.0.0",
+    "ethers": "^5.3.1",
+    "hardhat": "^2.4.0"
+  },
+  "peerDependencies": {
+    "@animoca/ethereum-hardhat-bootstrap": "^1.0.0",
+    "ethers": "^5.3.1",
+    "hardhat": "^2.4.0"
+  },
+  "engines": {
+    "node": ">=12.18 <13"
+  }
+}
