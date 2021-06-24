@@ -1,6 +1,6 @@
 {
   "name": "@animoca/ethereum-migrations-core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Common configs and functions for migrations projects based on hardhat-deploy",
   "keywords": [
     "animoca",
