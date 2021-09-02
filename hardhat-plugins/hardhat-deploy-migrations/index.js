@@ -24,7 +24,7 @@ subtask(TASK_DEPLOY_RUN_DEPLOY, async (taskArguments, hre, runSuper) => {
     }
   }
 
-  if (hre.network.tags.production || chainId == '1' || chainId == '137' || chainId == '56') {
+  if (hre.network.tags.production) {
     if (taskArguments.gasprice === undefined) {
       console.log('Please provide a --gasprice argument for production networks');
       process.exit();

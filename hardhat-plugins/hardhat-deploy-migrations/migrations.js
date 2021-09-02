@@ -141,6 +141,33 @@ const skipIfNetworkIsNotTagged = (tag) => {
   };
 };
 
+const skipIfNetworkIsLive = () => {
+  return async ({network, deployments}) => {
+    const {log} = deployments;
+    if (network.live) {
+      log(`Network ${network.name} is a live network, skipping...`);
+      return true;
+    }
+    // log(`Network ${network.name} is not live, proceeding...`);
+    return false;
+  };
+};
+
+const skipIfChainTypeIsNot = (chainType) => {
+  return async ({network, deployments}) => {
+    const {log} = deployments;
+    if (network.name.startsWith('hardhat') || network.name.startsWith('localhost')) {
+      // dev networks never skip
+      return false;
+    }
+    if (network.tags[chainType]) {
+      return false;
+    }
+    log(`Network is not of chain type '${chainType}', skipping...`);
+    return true;
+  };
+};
+
 // Batch actions
 
 const batchDoWhile = async (doFunction, doArgss, message, conditionFunction, acceptRevert = false) => {
@@ -190,6 +217,8 @@ module.exports = {
   skipIfNetworkIsNot,
   skipIfNetworkIsTagged,
   skipIfNetworkIsNotTagged,
+  skipIfNetworkIsLive,
+  skipIfChainTypeIsNot,
   batchDoWhile,
   batchDo,
 };
